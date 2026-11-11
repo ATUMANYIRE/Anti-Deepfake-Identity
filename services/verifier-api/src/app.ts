@@ -2,6 +2,8 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import multipart from '@fastify/multipart';
 import { registerVerifyRoutes } from './routes/verifyMedia.js';
+import { registerPkiRoutes } from './routes/pkiRegistry.js';
+import { registerStreamVerifyRoutes } from './routes/verifyStream.js';
 
 export async function buildApp() {
   const app = Fastify({ logger: true });
@@ -14,6 +16,8 @@ export async function buildApp() {
   });
 
   await app.register(registerVerifyRoutes);
+  await app.register(registerPkiRoutes);
+  await app.register(registerStreamVerifyRoutes);
 
   return app;
 }
